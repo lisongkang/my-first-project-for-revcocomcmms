@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
+	<rabbit:connection-factory id="connectionFactory"
+		host="10.205.22.77" username="admin" password="admin" port="5672"
+		virtual-host="/" channel-cache-size="5"/>
+	<rabbit:admin connection-factory="connectionFactory" />  
+		 <!-- queue 队列声明 -->  
+    <rabbit:queue  durable="true"  
+	        auto-delete="false" exclusive="false" name="queue-1" />  
+     <!-- exchange queue binging key 绑定 -->  
+    <rabbit:topic-exchange name="exchange-1"  
+        durable="true" auto-delete="false">  
+    </rabbit:topic-exchange>   
+   <!--  <bean id="jsonMessageConverter"    class="com.maywide.tool.mq.Gson2JsonMessageConverter" message-converter="jsonMessageConverter"/>  -->
+    <rabbit:template id="amqpTemplate" exchange="exchange-1"  routing-key="quartz.*"  
+        connection-factory="connectionFactory"/>
+</beans>

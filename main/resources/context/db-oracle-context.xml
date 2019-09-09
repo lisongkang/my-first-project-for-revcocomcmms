@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:cache="http://www.springframework.org/schema/cache" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xmlns:jee="http://www.springframework.org/schema/jee" xmlns:task="http://www.springframework.org/schema/task"
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:repository="http://www.springframework.org/schema/data/repository"
+    xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+    default-lazy-init="false">
+
+    <description>Spring公共配置 </description>
+
+    <!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
+    <context:component-scan base-package="com.maywide" scoped-proxy="targetClass">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+    </context:component-scan>
+    
+    <bean id="dataSourceSpied" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@10.205.16.209:1521:eda1"/>
+		
+		<property name="user" value="cysel" />
+		<property name="password" value="LAQ4yXz5" />
+		<property name="minPoolSize" value="5"/>   
+        <property name="maxPoolSize" value="100"/>   
+        <property name="initialPoolSize" value="5"/>  
+		<property name="acquireIncrement" value="5"/>
+        <property name="maxIdleTime" value="60"/>   
+        <property name="maxStatements" value="0"/>  
+		<property name="acquireRetryAttempts" value="30"/>
+		<property name="testConnectionOnCheckout" value="false"/>
+		<property name="testConnectionOnCheckin" value="true"/>
+        <property name="idleConnectionTestPeriod" value="60"/>
+	</bean>		
+	
+	
+	<!-- 定制log4jdbc做一些输出SQL信息的微调 -->
+    <bean id="extSlf4jSpyLogDelegator" class="com.maywide.core.dao.log4jdbc.ExtSlf4jSpyLogDelegator" /> 
+
+    <!-- 用log4jdbc对datasouce进行包裹实现完整的SQL语句跟踪 -->
+    <bean id="ds2" class="net.sf.log4jdbc.Log4jdbcProxyDataSource" depends-on="extSlf4jSpyLogDelegator">
+        <constructor-arg>
+            <ref bean="dataSourceSpied" />
+        </constructor-arg>
+    </bean> 
+    
+    
+
+    <!-- JPA Entity Manager 配置 -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="ds2" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
+        <property name="persistenceUnitPostProcessors" ref="persistenceUnitPostProcessors" />
+        <property name="packagesToScan" value="com.maywide.core.audit.envers,com.maywide.**.entity" />
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.connection.autocommit">false</prop>
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</prop>
+                <prop key="net.sf.ehcache.configurationResourceName">ehcache-config.xml</prop>
+                <!-- <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop> -->
+
+                <prop key="hibernate.cache.use_query_cache">true</prop>
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.generate_statistics">true</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+
+                <!-- <prop key="javax.persistence.validation.mode">none</prop> <prop key="hibernate.validator.apply_to_ddl">false</prop> -->
+
+                <prop key="hibernate.connection.SetBigStringTryClob">true</prop>
+
+                <prop key="org.hibernate.envers.do_not_audit_optimistic_locking_field">false</prop>
+                <prop key="org.hibernate.envers.global_with_modified_flag">true</prop>
+                
+                <!--<prop key="hibernate.search.default.directory_provider">filesystem</prop>
+                <prop key="hibernate.search.default.indexBase">F:/tmp/index</prop>
+            --></props>
+        </property>
+    </bean>
+
+    <bean id="persistenceUnitPostProcessors" class="com.maywide.core.dao.jpa.ExtPersistenceUnitPostProcessor" />
+
+    <!-- Spring Data JPA配置 -->
+    <jpa:repositories base-package="com.maywide.**.dao" transaction-manager-ref="transactionManager"
+        entity-manager-factory-ref="entityManagerFactory">
+        <repository:exclude-filter type="regex" expression="com.maywide.core.*" />
+    </jpa:repositories>
+
+    <!-- JPA 事务配置 -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+        <property name="dataSource" ref="ds2" />
+    </bean>
+
+    <!-- 使用annotation定义事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+    <!-- Spring Cache配置 -->
+    <cache:annotation-driven />
+    <!-- 与JPA Hibernate共享一个cacheManager -->
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ehcache" />
+    </bean>
+    <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache-config.xml" />
+        <property name="shared" value="true" />
+    </bean>
+
+    <task:scheduler id="springScheduler" pool-size="10" />
+    <!-- 用于增强Spring @Async 注解在异步模式能捕捉到异常日志 -->
+    <bean id="handlingAsyncTaskExecutor" class="com.maywide.core.context.async.HandlingAsyncTaskExecutor" />
+    <!-- 建议只定义@Async注解使用，尽量不用@Scheduled而改用后面的Quartz方式便于文本定义调整定时策略 -->
+    <task:annotation-driven executor="handlingAsyncTaskExecutor" scheduler="springScheduler" />
+
+</beans>

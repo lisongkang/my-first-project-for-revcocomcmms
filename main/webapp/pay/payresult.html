@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="format-detection"content="telephone=no"/>
+<title>支付结果</title>
+
+<link href="../assets/css/pages/pay-result.css" rel="stylesheet">
+<script src="../assets/plugins/jquery-1.10.2.min.js"type="text/javascript"></script>
+<script src="./pay-result.js"></script>
+
+</head>
+<body class="tehui">
+	<!--顶部 start-->
+	<header class="header">
+		<a href="javascript:void(0);" onclick="back();"
+			class="back">返回</a>
+		<h1 class="title" id="title">支付信息</h1>
+	</header>
+	<!--顶部 end-->
+	<!--主体 start-->
+	<section class="main" style="padding-top: 44px;">
+		<!--内容 start-->
+		<div class="plr gd">
+			<div class="card">
+				<div class="cards form">
+					<div class="row">
+						<em>订单号：</em><span id="orderNo"></span>
+					</div>
+					<div class="row">
+						<em>支付明细：</em><span id="payDetail"></span>
+					</div>
+					<div class="row">
+						<em>支付状态：</em><span id="payStatus"></span>
+					</div>
+					<div class="row" id="tipDiv">
+						<em id="tipTitle">错误提示：</em> <span id="tipInfo"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--内容 end-->
+		<!--提示 start-->
+		<div class="tip">
+			<h2>温馨提示</h2>
+			<p>请点左上角的返回按钮返回至客户端</p>
+		</div>
+		<!--提示 end-->
+	</section>
+	<!--主体 end-->
+
+</body>
+</html>

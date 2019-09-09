@@ -1,0 +1,131 @@
+.c-table th,.c-table td{ text-align:center;}
+.c-table{ border:1px solid #e5e5e5;}
+.c-table th{ background:#ebfcee; height:40px; line-height:40px; color:#666; font-size:14px}
+.c-table td{ font-size:13px; height:40px; line-height:40px}
+.c-table tbody tr{border-bottom:1px solid #e5e5e5}
+.btn-delete{ padding:4px 8px; background:#ddd; color:#666;cursor:pointer }
+
+.cus-table{ border:1px solid #e5e5e5; background:#fcfcfc}
+.cus-table td{text-align:left;font-size:13px; height:25px; line-height:25px;padding-left:15px}
+.c6{color:#666}
+.price{color:#f00}
+.cus-table td ul.f-con{margin-left:-10px}
+
+.fc{text-align:center;}
+.fl{float:left;}
+.fr{float:right;}
+
+/*网格树相关*/
+.commonTreeLeft {
+	float: left;
+	width: 19%;
+	min-height: 500px;
+	max-height: 500px;
+	overflow-y: auto;
+}
+
+.commonTreeRight {
+	float: right;
+	width: 80%;
+}
+
+.ztree * {
+	font-size: 14px !important;
+}
+
+.ztree li span.button.manageGrid_ico_open {
+	background-position: -110px -16px;
+	margin-right: 2px;
+	vertical-align: top;
+	*vertical-align: middle;
+}
+
+.ztree li span.button.manageGrid_ico_close, .ztree li span.button.manageGrid_ico_docu {
+	background-position: -110px 0;
+	margin-right: 2px;
+	vertical-align: top;
+	*vertical-align: middle;
+}
+
+.ztree li span.button.patchGrid_ico_docu {
+	background-position: -110px -32px;
+	margin-right: 2px;
+	vertical-align: top;
+	*vertical-align: middle;
+}
+
+.ztree li span.button.addressGrid_ico_open,
+.ztree li span.button.addressGrid_ico_close,
+.ztree li span.button.addressGrid_ico_docu {
+	background: url(../extras/jquery-ztree/css/zTreeStyle/img/diy/10.png) no-repeat scroll 0 0 transparent;
+	margin-right: 2px;
+	vertical-align: top;
+	*vertical-align: middle;
+}
+/*网格树相关*/
+
+/*短信模板 变量 start*/
+.con-fixing{
+	background:#ebfcee; 
+	border:1px solid #e5e5e5;
+	margin:9px 5px 2px 145px;
+}
+ ul.p-name1{display:none}
+ ul.p-name,ul.c-name{ margin-right: 10px;}
+ ul.f-con{margin-top:5px}
+ ul.p-name{ margin-top:-1px}
+ ul.p-name  li{margin-bottom:6px}
+ .con-name{margin: 12px 0 0 0;}
+ .con-name .control-ul{margin-top:-5px}
+ ul.p-name li,ul.c-name li{ float: left; border: 1px solid #ccc; padding: 6px 8px; margin: 0 6px 0 0; list-style: none; cursor:pointer;}
+ ul.p-name li.selected ,ul.c-name li.selected{ border: 1px solid #f57b2e;}
+ ul.p-name  li{margin-bottom:6px}
+ul.p-name li.selected b,ul.c-name li.selected b{    background:url("../img/s_item_selected.gif") no-repeat scroll right bottom rgba(0, 0, 0, 0);
+    height: 12px;
+    overflow: hidden;
+    position: relative;
+    right:-8px;
+    top: 6px;
+    padding:2px 4px
+    }
+ul#id_oldprd li{margin-left:3px}    
+
+.controls1 {
+    margin-left: 106px;
+}
+.controls1  #id_oldprd{
+	margin-left:-42px
+}
+.showMore{
+	cursor:pointer;
+	float:left;
+	background:#f56954;
+	color:#fff;
+	padding:0px 12px;
+	width:90px;
+	margin:0 auto;
+	margin-top:4px
+}
+#id_smstempvar .showMore{
+	margin-top:1px
+}
+#id_smstempvar{
+	margin-left: -32px;
+}
+#id_smstempvarinfo .controls .p-name li{margin-bottom:4px}
+.showMore span{
+	color:#fff;
+	display:block;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+}
+
+/*短信模板(评审)弹出框 end*/
+ul.p-name li.selected b,ul.c-name li.selected b{    background:url("../img/s_item_selected.gif") no-repeat scroll right bottom rgba(0, 0, 0, 0);
+.form-group1 ..control-labe{
+    /* padding-right: 10px; */
+    width: 86px;
+    float: left;
+}
+/*短信模板 (评审)弹出框 start*/

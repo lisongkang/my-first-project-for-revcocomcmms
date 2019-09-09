@@ -1,0 +1,69 @@
+package com.maywide.biz.inter.pojo.install;
+
+public class PrdParams implements java.io.Serializable {
+	private String servid 					;
+	private String logicdevno       ;
+	private String salespkgid       ;
+	private String pid              ;
+	private String salesid          ;
+	private String count            ;
+	private String unit             ;
+	private String selprds          ;
+	private String selectid			;
+	public String getServid() {
+		return servid;
+	}
+	public void setServid(String servid) {
+		this.servid = servid;
+	}
+	public String getLogicdevno() {
+		return logicdevno;
+	}
+	public void setLogicdevno(String logicdevno) {
+		this.logicdevno = logicdevno;
+	}
+	public String getSalespkgid() {
+		return salespkgid;
+	}
+	public void setSalespkgid(String salespkgid) {
+		this.salespkgid = salespkgid;
+	}
+	public String getPid() {
+		return pid;
+	}
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+	public String getSalesid() {
+		return salesid;
+	}
+	public void setSalesid(String salesid) {
+		this.salesid = salesid;
+	}
+	public String getCount() {
+		return count;
+	}
+	public void setCount(String count) {
+		this.count = count;
+	}
+	public String getUnit() {
+		return unit;
+	}
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+	public String getSelprds() {
+		return selprds;
+	}
+	public void setSelprds(String selprds) {
+		this.selprds = selprds;
+	}
+	public String getSelectid() {
+		return selectid;
+	}
+	public void setSelectid(String selectid) {
+		this.selectid = selectid;
+	}
+	
+	
+}

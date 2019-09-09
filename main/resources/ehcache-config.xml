@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd"
+    updateCheck="false" monitoring="autodetect" dynamicConfig="true">
+
+    <diskStore path="java.io.tmpdir/ehcache" />
+
+    <!-- DefaultCache setting. -->
+    <defaultCache maxElementsInMemory="50000" memoryStoreEvictionPolicy="LRU" eternal="false"
+        timeToIdleSeconds="1800" timeToLiveSeconds="1800" overflowToDisk="false" diskPersistent="false">
+    </defaultCache>
+    
+    <!-- Spring cache setting. -->
+    <cache name="SpringSecurityCache" maxElementsInMemory="50000" memoryStoreEvictionPolicy="LRU" eternal="true"
+        diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000">
+    </cache>
+    <cache name="PubPostSpringCache" maxElementsInMemory="50000" memoryStoreEvictionPolicy="LRU" eternal="true"
+        diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000">
+    </cache>
+    <cache name="AccountSubjectSpringCache" maxElementsInMemory="50000" memoryStoreEvictionPolicy="LRU" eternal="true"
+        diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000">
+    </cache>
+
+    <!-- Hibernate cache setting. -->
+    <cache name="com.maywide.biz.prv.entity.PrvMenudef" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true"
+        diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000">
+    </cache>
+    <cache name="uapCache" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="false"
+        diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" 
+        timeToLiveSeconds="300">
+    </cache>
+    
+    <cache name="expire" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="false"
+        diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" 
+        timeToLiveSeconds="3600">
+    </cache>
+    
+    <cache name="account" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="false"
+        diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" 
+        timeToLiveSeconds="3600">
+    </cache>
+</ehcache>

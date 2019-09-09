@@ -1,0 +1,80 @@
+.label-yellow, .badge-yellow {
+	background-color: #FFF!important;
+}
+.badge {
+	text-shadow: none;
+	font-size: 16px;
+	font-weight:bold;
+	padding-top: 1px;
+	padding-bottom: 3px;
+	font-weight: normal;
+	line-height: 15px;
+	background-color: #FBFFA6!important;
+}
+.btn-common:hover, .open .btn-common.dropdown-toggle {
+	background-color: #1F9277!important;
+	border-color: #1F9277;
+	font-weight:bold;
+	color:#68C7B1;
+}
+.btn-common, .btn-common:focus {
+	background-color: #1F9277!important;
+	border-color: #1F9277;
+	font-weight:bold;
+	font-size:16px;
+}
+
+.btn-cancel:hover, .open .btn-cancel.dropdown-toggle {
+	color: #68C7B1!important;
+	background-color: #1F9277!important;
+	border-color: #1F9277;
+	font-weight:bold;
+}
+.btn-cancel, .btn-cancel:focus {
+	color: #68C7B1!important;
+	background-color: #1F9277!important;
+	border-color: #1F9277;
+	font-weight:bold;
+	font-size:16px;
+}
+
+.btn-submit:hover, .open .btn-submit.dropdown-toggle {
+	color: #68C7B1!important;
+	background-color: #fee188!important;
+	border-color: #fee188;
+	font-weight:bold;
+}
+.btn-submit, .btn-submit:focus {
+	color: #68C7B1!important;
+	background-color: #fee188!important;
+	border-color: #fee188;
+	font-weight:bold;
+	font-size:16px;
+}
+
+.person-name {
+	font-weight:bold;font-size:14px;color:#FFF
+}
+.person-detail {
+	font-size:12px;color:#FFF
+}
+.person-votes {
+	font-weight:bold;font-size:10px;color:#FBFFA6;
+}
+.person-vv {
+	font-weight:bold;font-size:24px;color:#FBFFA6;
+}
+.title {
+	background-color: #00B489!important;
+	text-align: center;
+	padding-bottom:3px;
+}
+#loadingDiv
+{	
+	margin:auto auto 0px;
+	width:300px;
+	height:300px;
+	border-width: 0px;
+	text-align: center;
+	line-height: 300px;
+}
